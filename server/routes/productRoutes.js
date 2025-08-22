@@ -67,7 +67,15 @@ router.delete('/:id', async (req, res) => {
 // @access  Public
 router.get('/', async (req, res) => {
     try {
-        const products = await Product.find({});
+        console.log('Search query received:', req.query.q);
+        const keyword = req.query.q ? {                             // Search
+            name: {                                                 // Search
+                $regex: req.query.q,                                // Search
+                $options: 'i' // makes the search case-insensitive  // Search
+            }                                                       // Search
+        } : {}; // if the request is empty, return all products.    // Search
+
+        const products = await Product.find({ ...keyword });        // Search
         res.json(products);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
