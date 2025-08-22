@@ -4,6 +4,8 @@ import Header from './components/Header';
 import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
+import Register from './components/Register';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
             <Route path="/" element={<ProductList />} />
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} /> 
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} /> 
           </Routes>
         </main> 
       </div>
