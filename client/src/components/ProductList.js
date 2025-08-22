@@ -4,23 +4,34 @@ import './ProductList.css';
 import { Link } from 'react-router-dom';
 
 
-function App() {
+function ProductList() {
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(''); // Search status
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/api/products');
-        setProducts(res.data);
+          //Search
+          const url = searchQuery ? `http://localhost:3001/api/products?q=${searchQuery}` : `http://localhost:3001/api/products`;
+          const res = await axios.get(url);
+          setProducts(res.data);
       } catch (error) {
         console.error('Error when receiving goods:', error);
       }
     };
-
     fetchProducts();
-  }, []);
+  }, [searchQuery]); // useEffect reacts to changes in searchQuery
+  
+  //Search
+  const handleSearchChange  = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
+    <div>
+      {/*Search for products*/}
+      <input type="text" placeholder="Search for products..." value={searchQuery} onChange={handleSearchChange} className="search-input" />
+
       <div className="product-list">
         {products.length > 0 ? (
           products.map((product) => (
@@ -35,7 +46,8 @@ function App() {
           <p>No products found. Add them via API.</p>
         )}
       </div>
+    </div>
   );
 };
 
-export default App;
+export default ProductList;
