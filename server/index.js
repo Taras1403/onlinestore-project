@@ -17,7 +17,9 @@ app.use(cors());
 
 // import
 const productRoutes = require('./routes/productRoutes');
-app.use('/api/products', productRoutes);
+const authRoutes = require('./routes/authRoutes');   // auth/login
+app.use('/api/products', productRoutes);   
+app.use('/api/auth', authRoutes);                    // auth/login
     
 // Запуск сервера
 app.get('/', (req, res) => {
