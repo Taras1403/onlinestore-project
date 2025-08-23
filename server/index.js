@@ -18,8 +18,11 @@ app.use(cors());
 // import
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');   // auth/login
+const orderRoutes = require('./routes/orderRoutes');
+
 app.use('/api/products', productRoutes);   
 app.use('/api/auth', authRoutes);                    // auth/login
+app.use('/api/orders', orderRoutes);
     
 // Запуск сервера
 app.get('/', (req, res) => {
