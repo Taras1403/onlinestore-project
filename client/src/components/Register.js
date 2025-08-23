@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Redirect to the home page
 import './Auth.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [formData, setFormData] = useState({ email: '', password: '', });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();   // Redirect to the home page
 
@@ -30,11 +27,11 @@ const Register = () => {
 
   return (
     <div className="auth-container">
-      <h2>Реєстрація</h2>
+      <h2>Registration</h2>
       <form onSubmit={handleSubmit}>
         <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
         <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-        <button type="submit">Зареєструватися</button>
+        <button type="submit">Register</button>
       </form>
       {message && <p className="message">{message}</p>}
     </div>
