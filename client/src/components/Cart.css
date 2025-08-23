@@ -61,3 +61,20 @@
   border-top: 2px solid #555;
   padding-top: 20px;
 }
+
+.order-btn {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+}
+
+.order-btn:hover {
+  background-color: #4ac2e8;
+}
