@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Redirect to the home page
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';  // Redirect to the home page
 import './Auth.css';
 
 const Login = () => {
@@ -10,6 +11,7 @@ const Login = () => {
   });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:3001/api/auth/login', formData);
-      localStorage.setItem('token', res.data.token);
+      login(res.data.token);
       setMessage('Login successful!');
       navigate('/'); // Redirect to the home page
     } catch (error) {
