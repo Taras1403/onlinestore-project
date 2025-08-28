@@ -3,10 +3,29 @@ import axios from 'axios';
 import './ProductList.css';
 import { Link } from 'react-router-dom';
 
+const heroImages = [
+    '/images/hero-banner.webp',         //image hero-banner
+    '/images/hero-banner-2.webp',       //image hero-banner 
+];
 
 function ProductList() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState(''); // Search status
+  const [currentImageIndex, setCurrentImageIndex] = useState(0); // image
+  const [isFading, setIsFading] = useState(false);
+
+  // image hero-banner
+  useEffect(() => {
+        const intervalId = setInterval(() => {
+            setIsFading(true); 
+            setTimeout(() => {
+                setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+                setIsFading(false); 
+            }, 1000);
+        }, 15000); 
+
+        return () => clearInterval(intervalId);
+    }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,11 +46,30 @@ function ProductList() {
     setSearchQuery(e.target.value);
   };
 
-  return (
-    <div>
-      {/*Search for products*/}
-      <input type="text" placeholder="Search for products..." value={searchQuery} onChange={handleSearchChange} className="search-input" />
+  const currentImage = heroImages[currentImageIndex]; //image hero-banner
 
+  return (
+  <>
+    <div className="hero-banner">
+        <div className="hero-content-wrapper">
+          <div className="hero-text-container">
+            <h1>Нові гаджети вже тут!</h1>
+            <p>Відкрийте для себе нові можливості з нашими технологічними новинками.</p>
+          </div>
+          <div className="hero-image-container">
+            <img key={currentImage} src={currentImage} alt="Hero Product" className={`hero-image ${isFading ? 'fading' : ''}`}/>
+          </div>
+        </div>
+    </div>
+    
+    <div className='main-content'>
+      {/*Search for products*/}
+      <div className='search-section'>
+        <h2>Products</h2>
+        <input type="text" placeholder="Search for products..." value={searchQuery} onChange={handleSearchChange} className="search-input" />
+      </div>
+
+      {/* Product grid */}
       <div className="product-list">
         {products.length > 0 ? (
           products.map((product) => (
@@ -47,6 +85,7 @@ function ProductList() {
         )}
       </div>
     </div>
+  </>
   );
 };
 
