@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { AuthProvider } from './context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
@@ -13,21 +14,23 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<ProductList />} />
-            <Route path="/products/:id" element={<ProductDetails />} />
-            <Route path="/cart" element={ <PrivateRoute> <Cart /> </PrivateRoute> } /> 
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} /> 
-          </Routes>
-        </main>
-        <ToastContainer /> 
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<ProductList />} />
+              <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="/cart" element={ <PrivateRoute> <Cart /> </PrivateRoute> } /> 
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} /> 
+            </Routes>
+          </main>
+          <ToastContainer /> 
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 
