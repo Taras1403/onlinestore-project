@@ -38,13 +38,13 @@ function ProductList() {
         console.error('Error when receiving goods:', error);
       }
     };
-    fetchProducts();
+   fetchProducts();
   }, [searchQuery]); // useEffect reacts to changes in searchQuery
   
   //Search
-  const handleSearchChange  = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  //const handleSearchChange  = (e) => {
+  //  setSearchQuery(e.target.value);
+  //};
 
   const currentImage = heroImages[currentImageIndex]; //image hero-banner
 
@@ -53,8 +53,9 @@ function ProductList() {
     <div className="hero-banner">
         <div className="hero-content-wrapper">
           <div className="hero-text-container">
-            <h1>Нові гаджети вже тут!</h1>
-            <p>Відкрийте для себе нові можливості з нашими технологічними новинками.</p>
+            <h1>The new gadgets are here!</h1>
+            <p>Discover new possibilities with our technological innovations.</p>
+            <Link to="/">Learn more</Link>
           </div>
           <div className="hero-image-container">
             <img key={currentImage} src={currentImage} alt="Hero Product" className={`hero-image ${isFading ? 'fading' : ''}`}/>
@@ -64,10 +65,13 @@ function ProductList() {
     
     <div className='main-content'>
       {/*Search for products*/}
+
+      {/*
       <div className='search-section'>
         <h2>Products</h2>
         <input type="text" placeholder="Search for products..." value={searchQuery} onChange={handleSearchChange} className="search-input" />
       </div>
+      */}
 
       {/* Product grid */}
       <div className="product-list">
