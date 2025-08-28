@@ -1,9 +1,69 @@
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero-banner {
+  background-color: #bfd8e0;
+  padding: 60px 20px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+}
+
+.hero-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto; 
+  height: 100%;   
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; 
+}
+
+.hero-text-container {
+  flex: 1;
+  padding-left: 20px;
+  z-index: 2;
+}
+
+.hero-text-container h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero-text-container p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.hero-image-container {
+    flex: 1;
+    text-align: right;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-image {
+    max-width: 300px;
+    max-height: 400px;
+    object-fit: contain;
+    transition: opacity 1s ease-in-out;
+    opacity: 1; 
+}
+
+.hero-image.fading {
+    opacity: 0;
+}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 40px;
 }
 
 .product-card {
