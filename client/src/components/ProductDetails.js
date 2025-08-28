@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios'; 
-import './ProductDetails.css';
 import { CartContext } from "../context/CartContext";
+import { toast } from 'react-toastify';
+
+import './ProductDetails.css';
 
 const ProductDetails = () => {
     const { id } = useParams(); // id url
@@ -10,7 +12,7 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true);
     const { addToCart } = useContext(CartContext);
 
-    useState(() => {
+    useEffect(() => {
         const fetchProduct = async () => {
             try {
                 const res = await axios.get(`http://localhost:3001/api/products/${id}`);
@@ -24,6 +26,12 @@ const ProductDetails = () => {
 
         fetchProduct();
     }, [id]);
+
+    // Add to cart
+    const handleAddToCart = () => {
+        addToCart(product);
+        toast.success('Item added to cart!'); 
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -40,7 +48,7 @@ const ProductDetails = () => {
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <p>In stock: {product.countInStock}</p>
-            <button onClick={() => addToCart(product)} className="add-to-cart-btn">Add to Shop cart</button>
+            <button onClick={handleAddToCart} className="add-to-cart-btn">Add to Shop cart</button>
         </div>
     );
 };
