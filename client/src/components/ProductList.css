@@ -40,11 +40,21 @@
     color: #666;
 }
 
+.hero-text-container a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 2px solid #000000;
+}
+
 .hero-image-container {
-    flex: 1;
-    text-align: right;
-    position: relative;
-    z-index: 1;
+  flex: 1;
+  text-align: right;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-image {
@@ -95,16 +105,4 @@
 
 .product-card p {
   margin: 5px 0;
-}
-
-.search-input {
-  width: 100%;
-  max-width: 500px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #555;
-  border-radius: 5px;
-  background-color: #444;
-  color: white;
-  font-size: 1rem;
 }
