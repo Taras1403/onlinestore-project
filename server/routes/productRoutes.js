@@ -7,7 +7,7 @@ const router = express.Router();
 // @access  Private (for the admin)
 router.post('/', async (req, res) => {
 
-    console.log('Тіло запиту:', req.body);
+    console.log('Body of the request:', req.body);
 
     try {
         const { name, description, price, image, category, countInStock } = req.body;
@@ -15,10 +15,9 @@ router.post('/', async (req, res) => {
         const createdProduct = await newProduct.save();
         res.status(201).json(createdProduct);
     } catch (error) {
-        res.status(400).json({ message: 'Помилка при створенні товару' });
+        res.status(400).json({ message: 'Error when creating a product' });
     }
 });
-
 // @route   PUT /api/products/:id
 // @desc     Update product by ID
 // @access  Private
@@ -76,7 +75,15 @@ router.get('/', async (req, res) => {
         } : {}; // if the request is empty, return all products.    // Search
 
         const products = await Product.find({ ...keyword });        // Search
-        res.json(products);
+
+        const productsWithImageUrls = products.map(product => {     //Forming the URL of an image
+            return {
+                ...product._doc, // We distribute existing product data
+                image: `http://localhost:3001/images/${product.image}`
+            };
+        });
+
+        res.json(productsWithImageUrls);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
