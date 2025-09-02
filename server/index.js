@@ -1,7 +1,9 @@
+require('dotenv').config(); // download .env
+
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const mongoose = require('mongoose');
-require('dotenv').config(); // download .env
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,6 +25,7 @@ const orderRoutes = require('./routes/orderRoutes');
 app.use('/api/products', productRoutes);   
 app.use('/api/auth', authRoutes);                    // auth/login
 app.use('/api/orders', orderRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
     
 // Запуск сервера
 app.get('/', (req, res) => {
