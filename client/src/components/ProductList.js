@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './ProductList.css';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
 
 const heroImages = [
     '/images/hero-banner.webp',         //image hero-banner
@@ -13,6 +14,7 @@ function ProductList() {
   const [searchQuery, setSearchQuery] = useState(''); // Search status
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // image
   const [isFading, setIsFading] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   // image hero-banner
   useEffect(() => {
@@ -48,6 +50,14 @@ function ProductList() {
 
   const currentImage = heroImages[currentImageIndex]; //image hero-banner
 
+  // Add to cart without going to the product page
+  const handleAddToCart = (e, product) => {
+    e.preventDefault(); 
+    e.stopPropagation(); 
+    addToCart(product);
+    console.log('Added to cart:', product.name);
+  };
+
   return (
   <>
     <div className="hero-banner">
@@ -62,6 +72,8 @@ function ProductList() {
           </div>
         </div>
     </div>
+
+    <h1>New on the Online store</h1>
     
     <div className='main-content'>
       {/*Search for products*/}
@@ -78,10 +90,19 @@ function ProductList() {
         {products.length > 0 ? (
           products.map((product) => (
             <Link key={product._id} to={`/products/${product._id}`} className="product-card">
-              <h2>{product.name}</h2>
-              <img src={product.image} alt={product.name} style={{ width: '200px' }} />
-              <p>{product.description}</p>
-              <p>Price: ${product.price}</p>
+              <img src={product.image} alt={product.name} style={{ width: '70px' }} />
+              <div class="product-info">
+                <h3>{product.name}</h3>
+                {/*<p>{product.description}</p>*/}
+                
+                  <div className="product-actions-bottom">
+                    <div className="product-price-container">
+                      From ${product.price}
+                    </div>
+                    <img src="./images/follow.svg" alt="Follow" className="add-follow-icon" />
+                    <img src="./images/shop.svg" alt="Add to cart" className="add-to-cart-icon" onClick={(e) => handleAddToCart(e, product)}/>
+                  </div>
+              </div>
             </Link>
           ))
         ) : (
