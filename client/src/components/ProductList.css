@@ -7,7 +7,7 @@
 .hero-banner {
   background-color: #bfd8e0;
   padding: 60px 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   overflow: hidden;
   position: relative;
   height: 250px;
@@ -73,36 +73,62 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 40px;
+  align-items: stretch;
+  gap: 20px;
 }
 
 .product-card {
-  background-color: #333;
-  border-radius: 10px;
+  background-color: #f8f8f8;
+  border-radius: 3px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  width: 300px;
+  width: 160px;
   transition: transform 0.2s ease-in-out;
   color: inherit;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-info {
+  width: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.product-actions-bottom {
+  width: 100%;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
+  margin-top: auto;
+}
+
+.product-price-container {
+  color: #828280;
+}
+
+.product-info h3 {
+  width: 100%;
+  text-align: left;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
 }
 
-.product-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.add-to-cart-icon {
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
 }
 
-.product-card h2 {
-  margin-top: 0;
-  color: #61dafb;
+.add-follow-icon {
+  width: 21px;
+  height: 21px;
+  cursor: pointer;
 }
 
-.product-card p {
-  margin: 5px 0;
-}
